@@ -33,8 +33,8 @@ st.markdown("""
 Esta aplicación resuelve un problema de balance de masa para ajustar los grados Brix de una pulpa de fruta.
 """)
 
-# Mostrar la imagen del problema
-st.image("https://i.ibb.co/L5T1M6B/image-1067ac.png", caption="Problema de Balance de Masa", use_column_width=True)
+# Mostrar la imagen de pulpas de fruta
+st.image("https://images.unsplash.com/photo-1549293816-c956c7017772", caption="Pulpas de fruta", use_column_width=True)
 
 st.header("Parámetros del Problema")
 
