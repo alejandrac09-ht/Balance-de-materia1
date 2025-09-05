@@ -32,7 +32,7 @@ Esta aplicación resuelve un problema de balance de masa para ajustar los grados
 """)
 
 # Mostrar la imagen del problema
-st.image("https://i.ibb.co/6P83jS6/image-10ee94.png", caption="Problema de Balance de Masa", use_column_width=True)
+st.image("https://i.ibb.co/L5T1M6B/image-1067ac.png", caption="Problema de Balance de Masa", use_column_width=True)
 
 st.header("Parámetros del Problema")
 
@@ -68,3 +68,5 @@ El cálculo se basa en el principio de conservación de la masa. La masa de sól
 3. **Azúcar a agregar:** La cantidad de azúcar a agregar es simplemente la diferencia entre la masa total final y la masa inicial de la pulpa.
    $M_{azucar\_agregar} = M_{pulpa\_final} - M_{pulpa\_inicial}$
 """)
+
+
