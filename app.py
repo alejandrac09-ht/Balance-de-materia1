@@ -11,13 +11,15 @@ def calcular_azucar(masa_inicial, brix_inicial, brix_final):
     # Calcular la masa de sólidos disueltos (azúcar) inicial
     masa_azucar_inicial = masa_inicial * brix_inicial_decimal
 
-    # Calcular la masa total final requerida
-    masa_total_final = masa_azucar_inicial / brix_final_decimal
-
-    # Calcular la masa de agua que se debe agregar (en este caso, es azúcar, por lo que la masa de agua es 0)
-    # Por lo tanto, la masa de azúcar a agregar es la diferencia entre la masa final y la masa inicial
-    azucar_a_agregar = masa_total_final - masa_inicial
-
+    # La ecuación de balance de masa es:
+    # (masa_inicial + masa_azucar_a_agregar) * brix_final_decimal = masa_azucar_inicial + masa_azucar_a_agregar
+    # Resolviendo para masa_azucar_a_agregar:
+    # masa_inicial * brix_final_decimal + masa_azucar_a_agregar * brix_final_decimal = masa_azucar_inicial + masa_azucar_a_agregar
+    # masa_azucar_a_agregar * (1 - brix_final_decimal) = masa_inicial * brix_final_decimal - masa_azucar_inicial
+    # azucar_a_agregar = (masa_inicial * brix_final_decimal - masa_azucar_inicial) / (1 - brix_final_decimal)
+    
+    azucar_a_agregar = (masa_inicial * brix_final_decimal - masa_azucar_inicial) / (1 - brix_final_decimal)
+    
     return azucar_a_agregar
 
 # Configuración de la página de Streamlit
@@ -57,16 +59,20 @@ if st.button("Calcular cantidad de azúcar"):
 st.markdown("---")
 st.markdown("### Explicación del Cálculo")
 st.markdown("""
-El cálculo se basa en el principio de conservación de la masa. La masa de sólidos disueltos (azúcar) en la pulpa antes y después de la adición de azúcar debe ser igual, pero distribuida en una masa total mayor.
+El cálculo se basa en un **balance de masa para un proceso de enriquecimiento**. A diferencia de la dilución, en este caso la masa de sólidos disueltos (azúcar) en la pulpa antes y después de la adición de azúcar cambia.
 
-1. **Masa inicial de azúcar:** Se calcula multiplicando la masa inicial de la pulpa por su porcentaje de Brix inicial.
-   $M_{azucar\_inicial} = M_{pulpa\_inicial} \times \frac{°Brix_{inicial}}{100}$
-   
-2. **Masa total final:** La masa de azúcar inicial se mantiene, pero ahora representa un porcentaje menor (los Brix finales) de la nueva masa total.
-   $M_{pulpa\_final} = \frac{M_{azucar\_inicial}}{\frac{°Brix_{final}}{100}}$
+La ecuación se puede expresar de la siguiente manera:
 
-3. **Azúcar a agregar:** La cantidad de azúcar a agregar es simplemente la diferencia entre la masa total final y la masa inicial de la pulpa.
-   $M_{azucar\_agregar} = M_{pulpa\_final} - M_{pulpa\_inicial}$
+$$(M_{inicial} + M_{azúcar\_agregado}) \times °Brix_{final} = (M_{inicial} \times °Brix_{inicial}) + M_{azúcar\_agregado}$$
+
+Resolviendo para $M_{azúcar\_agregado}$, obtenemos la fórmula implementada en el código:
+
+$$M_{azúcar\_agregado} = \\frac{(M_{inicial} \times °Brix_{final}) - (M_{inicial} \times °Brix_{inicial})}{1 - °Brix_{final}}$$
+
+**Masa inicial de la pulpa:** 50 kg
+**Grados Brix iniciales:** 7%
+**Grados Brix finales:** 10%
+**Masa de azúcar a agregar:** $$\\frac{(50 \times 0.10) - (50 \times 0.07)}{1 - 0.10} = \\frac{5 - 3.5}{0.9} = \\frac{1.5}{0.9} \\approx 1.67$$ kg
+
 """)
-
 
